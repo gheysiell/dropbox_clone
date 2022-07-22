@@ -31,7 +31,7 @@ export const Container = styled.div`
             transform: translateX(0);
         }
 
-        &scrollOpen .action--close {
+        &.scrollOpen .action--close {
             display: none;
         }
     }
