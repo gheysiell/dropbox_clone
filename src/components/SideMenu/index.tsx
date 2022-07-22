@@ -1,46 +1,46 @@
-import React, { ReactNode, useEffect, useState } from 'react'
-import { Container } from './styles'
-
-const scrollThreshold = 300
+import React, { useState, useEffect } from 'react';
+import { Container } from './styles';
 
 declare global {
-    interface window {
-        toggleActiveMenu: (() => void) | undefined
-    }
+  interface Window {
+    toggleActiveMenu: (() => void) | undefined;
+  }
 }
 
 interface Props {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
+
+const scrollThreshold = 300;
 
 const SideMenu: React.FC<Props> = ({ children }) => {
-    const [scrollY, setScrollY] = useState(0)
-    const [isActive, setIsActive] = useState(false)
+  const [isActive, setIsActive] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
-    useEffect(() => {
-        function onScroll() {
-            setScrollY(window.scrollY)
-            setIsActive(false)
-        }
-
-        window.addEventListener('scroll', onScroll)
-        return () => window.removeEventListener('scroll', onScroll)
-    }, [])
-
-    const classes = [
-        isActive ? 'open' : '',
-        scrollY < scrollThreshold ? 'scrollOpen' : '',
-    ]
-    
-    const className = classes.join(' ').trim()
-
-    function toggleActiveMenu() {
-        setIsActive(prev => !prev)
+  useEffect(() => {
+    function onScroll() {
+      setScrollY(window.scrollY);
+      setIsActive(false);
     }
 
-    window.toggleActiveMenu = toggleActiveMenu
+    window.addEventListener('scroll', onScroll);
 
-    return <Container className={className}>{ children }</Container>           
-}
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [scrollY]);
 
-export default SideMenu
+  const classes = [
+    isActive ? 'open' : '',
+    scrollY <= scrollThreshold ? 'scrollOpen' : '',
+  ];
+  const className = classes.join(' ').trim();
+
+  function toggleActiveMenu() {
+    setIsActive((prev) => !prev);
+  }
+
+  window.toggleActiveMenu = toggleActiveMenu;
+
+  return <Container className={className}>{children}</Container>;
+};
+
+export default SideMenu;

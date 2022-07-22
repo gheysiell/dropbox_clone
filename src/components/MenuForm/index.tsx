@@ -16,7 +16,7 @@ const MenuForm: React.FC = () => {
             <Navigation>
                 <h1>
                     <DropboxLogo/>
-                    <span></span>
+                    <span>Dropbox</span>
                 </h1>
 
                 <button className="action--close" onClick={handleToggle}>
@@ -28,7 +28,7 @@ const MenuForm: React.FC = () => {
                 <span className='title'>Registre-se</span>
                 <span className='subtitle'>Preencha o formulário abaixo</span>
 
-                <input type="text" placeholder='nome'/>
+                <input type="text" placeholder='Nome'/>
                 <input type="text" placeholder='Sobrenome'/>
                 <input type="email" placeholder='E-mail'/>
                 <input type="password" placeholder='Senha'/>
